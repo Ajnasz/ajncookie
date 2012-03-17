@@ -1,6 +1,6 @@
 {
   "author": "Lajos Koszti <ajnasz@ajnasz.hu> (http://ajnasz.hu)",
-  "name": "cookie",
+  "name": "ajncookie",
   "description": "A very basic cookie setter and getter",
   "version": "0.0.1",
   "repository": {
