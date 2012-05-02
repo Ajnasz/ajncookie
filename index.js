@@ -16,7 +16,7 @@ function setCookie(res, cookie, val, expdays) {
     var cookieVal = cookie + '=' + val;	
     if (expdays) {
       expdays = parseInt(expdays);
-      if (!isNaN(expdays) {
+      if (!isNaN(expdays)) {
         var expdate = new Date();
 	expdate.setDate(expdate.getDate() + expdays);
 	cookieVal += '; expires=' + expdate.toUTCString();
