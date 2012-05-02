@@ -12,9 +12,23 @@ function getCookie(req, cookieName) {
     return output;
 }
 
-function setCookie(res, cookie, val) {
-    res.setHeader('Set-Cookie', cookie + '=' + val);
+function setCookie(res, cookie, val, expdays) {
+    var cookieVal = cookie + '=' + val;	
+    if (expdays) {
+      expdays = parseInt(expdays);
+      if (!isNaN(expdays) {
+        var expdate = new Date();
+	expdate.setDate(expdate.getDate() + expdays);
+	cookieVal += '; expires=' + expdate.toUTCString();
+      }      
+    }
+    res.setHeader('Set-Cookie', cookieVal);
+}
+
+function delCookie(res, cookie) {
+    setCookie(res, cookie, "", -1);
 }
 
 exports.getCookie = getCookie;
 exports.setCookie = setCookie;
+exports.delCookie = delCookie;
