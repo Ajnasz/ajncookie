@@ -13,15 +13,18 @@ function getCookie(req, cookieName) {
 }
 
 function setCookie(res, cookie, val, expdays) {
-    var cookieVal = cookie + '=' + val;	
+    var cookieVal = cookie + '=' + val,
+        expdate;
+
     if (expdays) {
-      expdays = parseInt(expdays);
-      if (!isNaN(expdays)) {
-        var expdate = new Date();
-	expdate.setDate(expdate.getDate() + expdays);
-	cookieVal += '; expires=' + expdate.toUTCString();
-      }      
+        expdays = parseInt(expdays, 10);
+        if (!isNaN(expdays)) {
+            expdate = new Date();
+            expdate.setDate(expdate.getDate() + expdays);
+            cookieVal += '; expires=' + expdate.toUTCString();
+        }
     }
+
     res.setHeader('Set-Cookie', cookieVal);
 }
 
