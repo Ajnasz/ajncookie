@@ -28,18 +28,20 @@ function getCookie(req, cookieName) {
     return output;
 }
 
-function setCookie(res, cookie, val, expdays, domain, secure, httpOnly) {
+function setCookie(res, cookie, val, expiration, domain, secure, httpOnly) {
     var cookieVal = cookie + '=' + val,
         expdate,
         cookies;
 
-    if (expdays) {
-        expdays = parseInt(expdays, 10);
-        if (!isNaN(expdays)) {
-            expdate = new Date();
-            expdate.setDate(expdate.getDate() + expdays);
-            cookieVal += '; expires=' + expdate.toUTCString();
+    if (expiration) {
+        // expiration can be a Date object
+        if (expiration instanceof Date) {
+            expdate = expiration;
+        // expiration can be a unix timestamp
+        } else {
+            expdate = new Date(expiration);
         }
+        cookieVal += '; expires=' + expdate.toUTCString();
     }
 
     if (domain) {
@@ -67,8 +69,11 @@ function setCookie(res, cookie, val, expdays, domain, secure, httpOnly) {
     res.setHeader('Set-Cookie', cookieVal);
 }
 
+const day = 60 * 60 * 24 * 1000;
+
 function delCookie(res, cookie, domain, secure, httpOnly) {
-    setCookie(res, cookie, "", -1, domain, secure, httpOnly);
+    // minus a day
+    setCookie(res, cookie, "", Date.now() - day, domain, secure, httpOnly);
 }
 
 exports.getCookie = getCookie;
