@@ -2,7 +2,7 @@
   "author": "Lajos Koszti <ajnasz@ajnasz.hu> (http://ajnasz.hu)",
   "name": "ajncookie",
   "description": "A very basic cookie setter and getter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "git://github.com/Ajnasz/ajncookie.git"
