@@ -28,7 +28,7 @@ function getCookie(req, cookieName) {
     return output;
 }
 
-function setCookie(res, cookie, val, expiration, domain, secure, httpOnly) {
+function setCookie(res, cookie, val, expiration, domain, secure, httpOnly, path) {
     var cookieVal = cookie + '=' + val,
         expdate,
         cookies;
@@ -47,6 +47,11 @@ function setCookie(res, cookie, val, expiration, domain, secure, httpOnly) {
     if (domain) {
         cookieVal += '; Domain=' + domain;
     }
+
+    if (path) {
+        cookieVal += '; Path=' + path;
+    }
+
 
     if (secure) {
         cookieVal += '; Secure';

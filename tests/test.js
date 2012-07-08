@@ -75,6 +75,5 @@ http.get(conf, function (res) {
         });
         assert.equal(new Date(cookieProps.expires).getTime() < Date.now(), true);
         console.log('tests passed');
-        
     });
 });
