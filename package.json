@@ -11,6 +11,8 @@
       "test": "jake"
   },
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "jake": ">=0.3.11",
+  },
   "optionalDependencies": {}
 }
