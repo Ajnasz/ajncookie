@@ -1,8 +1,10 @@
 /*jslint node: true*/
 function getCookie(req, cookieName) {
+    "use strict";
     var cookies = {},
         cn,
         output;
+
     if (req.headers.cookie) {
         req.headers.cookie.split(';').forEach(function (cookie) {
             var parts = cookie.split('=');
@@ -25,10 +27,12 @@ function getCookie(req, cookieName) {
         });
         output = cookies[cookieName];
     }
+
     return output;
 }
 
 function setCookie(res, cookie, val, expiration, domain, secure, httpOnly, path) {
+    "use strict";
     var cookieVal = cookie + '=' + val,
         expdate,
         cookies;
@@ -52,7 +56,6 @@ function setCookie(res, cookie, val, expiration, domain, secure, httpOnly, path)
         cookieVal += '; Path=' + path;
     }
 
-
     if (secure) {
         cookieVal += '; Secure';
     }
@@ -74,9 +77,10 @@ function setCookie(res, cookie, val, expiration, domain, secure, httpOnly, path)
     res.setHeader('Set-Cookie', cookieVal);
 }
 
-const day = 60 * 60 * 24 * 1000;
+var day = 60 * 60 * 24 * 1000;
 
 function delCookie(res, cookie, domain, secure, httpOnly) {
+    "use strict";
     // minus a day
     setCookie(res, cookie, "", Date.now() - day, domain, secure, httpOnly);
 }
