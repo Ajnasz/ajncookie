@@ -12,7 +12,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "jake": ">=0.3.11",
+    "jake": ">=0.3.11"
   },
   "optionalDependencies": {}
 }
