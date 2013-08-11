@@ -1,1 +1,120 @@
 A very simple cookie manager
+
+
+setCookie(res, cookie, val, expiration, domain, secure, httpOnly, path)
+    void
+    Sets a cookie header into the http response
+
+  res:
+        type: http.ServerResponseobject
+                (see http://nodejs.org/api/http.html#http_class_http_serverresponse)
+        which passed to each http request
+
+    cookie:
+        type: string
+        Name of the cookie
+
+    val:
+        type: string
+        The value of the cookie
+
+    expiration:
+        type: Date
+        optional
+        a date which defines when the cookie must expire
+
+    domain:
+        type: string
+        optional
+        the scope of the cookie, tells the browser that cookies should only be
+        sent back to the server for the given domain
+
+    secure:
+        type: boolean
+        optional
+        The Secure attribute is meant to keep cookie communication limited to
+        encrypted transmission
+
+    httpOnly:
+        optional
+        The HttpOnly attribute directs browsers to use cookies via the HTTP
+        protocol only.
+
+    path:
+        type: string
+        optional
+        the scope of the cookie, tells the browser that cookies should only be
+        sent back to the server for the given path
+
+
+getCookie(req, cookieName)
+    returns string
+    Gets a cookie from the http request
+
+    req:
+        type: http.ClientRequest
+                (see http://nodejs.org/api/http.html#http_class_http_clientrequest)
+        which passed to each http request
+
+    cookieName:
+        type: string
+        The name of the cookie which value need to be returned
+
+
+delCookie(res, cookie, domain, secure, httpOnly, path)
+    void
+    Sets the 'Set-Content' http header to request the browser to delete the given cookie
+    Basically sets the expiration to a past date
+
+    res:
+        type: http.ServerResponseobject
+                (see http://nodejs.org/api/http.html#http_class_http_serverresponse)
+        which passed to each http request
+
+    cookie:
+        type: string
+        Name of the cookie
+
+    val:
+        type: string
+        The value of the cookie
+
+    domain:
+        type: string
+        optional
+        the scope of the cookie, tells the browser that cookies should only be
+        sent back to the server for the given domain
+
+    secure:
+        type: boolean
+        optional
+        The Secure attribute is meant to keep cookie communication limited to
+        encrypted transmission
+
+    httpOnly:
+        optional
+        The HttpOnly attribute directs browsers to use cookies via the HTTP
+        protocol only.
+
+    path:
+        type: string
+        optional
+        the scope of the cookie, tells the browser that cookies should only be
+        sent back to the server for the given path
+
+
+Example of usage:
+
+var cookie = require('ajncookie');
+
+http.createServer((function () {
+    return function (req, res) {
+        // set the foo cookie if not set yet
+        if (!cookie.getCookie(req, 'foo')) {
+            cookie.setCookie(res, 'foo', 'bar', null, null, false, true, '/');
+        }
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.end('OK');
+    };
+}()));
+srv.listen(1111, '127.0.0.1');
