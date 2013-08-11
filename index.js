@@ -100,10 +100,10 @@ function setCookie(res, cookie, val, expiration, domain, secure, httpOnly, path)
 
 var day = 60 * 60 * 24 * 1000;
 
-function delCookie(res, cookie, domain, secure, httpOnly) {
+function delCookie(res, cookie, domain, secure, httpOnly, path) {
     "use strict";
     // minus a day
-    setCookie(res, cookie, "", Date.now() - day, domain, secure, httpOnly);
+    setCookie(res, cookie, "", Date.now() - day, domain, secure, httpOnly, path);
 }
 
 exports.getCookie = getCookie;
